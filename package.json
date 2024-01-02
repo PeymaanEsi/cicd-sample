@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"TEST\""
+    "test": "echo \"TEST\"",
+    "build": "mkdir build && cd build && touch data.dat && echo \"BUILD\""
   },
   "repository": {
     "type": "git",
