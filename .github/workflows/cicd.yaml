@@ -1,10 +1,10 @@
 name: CI-CD
 on: push
 jobs:
-  CI:
+  CICD:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "CI Phase"
+      - run: echo "CICD"
       - name: Checkout
         uses: actions/checkout@v4.1.1
       - name: Setup NodeJS
@@ -22,26 +22,6 @@ jobs:
         run: npm run test
       - name: ls
         run: ls -ltrha
-  CD:
-    needs: CI
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "CD Phase"
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16
-          cache: 'npm'
-      - name: Lint
-        run: npm run lint
-      - name: Build Dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Test
-        run: npm run test
       - name: Zip
         run: tar czvf build.gz build/
       - name: Verify
@@ -55,3 +35,13 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           source: "./build.gz"
           target: "/home/iranperson"
+      - name: Remote gunzip
+        uses: appleboy/ssh-action@v1.0.2
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: tar xvf build.gz
+      - name: verify
+        run: ls -ltrh
