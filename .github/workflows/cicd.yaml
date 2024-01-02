@@ -16,9 +16,42 @@ jobs:
         run: npm run lint
       - name: Build Dependencies
         run: npm ci
-      - name: Test
-        run: npm run test
       - name: Build
         run: npm run build
+      - name: Test
+        run: npm run test
       - name: ls
         run: ls -ltrha
+  CD:
+    needs: CI
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "CD Phase"
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Lint
+        run: npm run lint
+      - name: Build Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm run test
+      - name: Zip
+        run: tar czvf build.gz build/
+      - name: Verify
+        run: file build.gz
+      - name: Copy file via ssh password
+        uses: appleboy/scp-action@0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: "./build.zip"
+          target: "/tmp"
