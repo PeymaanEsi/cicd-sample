@@ -1,0 +1,23 @@
+{
+  "name": "cicd-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"TEST\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeymaanEsi/cicd-sample.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PeymaanEsi/cicd-sample/issues"
+  },
+  "homepage": "https://github.com/PeymaanEsi/cicd-sample#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "redux": "^5.0.1"
+  }
+}
