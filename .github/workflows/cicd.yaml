@@ -47,11 +47,12 @@ jobs:
       - name: Verify
         run: file build.gz
       - name: Copy file via ssh password
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          source: "./build.zip"
-          target: "/tmp"
+        # uses: appleboy/scp-action@v0.1.7
+        # with:
+        #   host: ${{ secrets.HOST }}
+        #   port: ${{ secrets.PORT }}
+        #   username: ${{ secrets.USERNAME }}
+        #   password: ${{ secrets.PASSWORD }}
+        #   source: "./build.zip"
+        #   target: "/tmp"
+        run: scp -P ${{ secrets.PORT }} ./build.zip ${{ secrets.USERNAME }}:${{ secrets.PASSWORD }}@${{ secrets.HOST }}:/tmp/
