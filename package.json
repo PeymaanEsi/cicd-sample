@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "lint": "echo \"LINT\"",
     "test": "echo \"TEST\"",
     "build": "mkdir build && cd build && touch data.dat && echo \"BUILD\""
   },

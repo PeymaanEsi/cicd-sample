@@ -13,10 +13,10 @@ jobs:
           node-version: 16
           cache: 'npm'
       - name: Lint
-        run: eslint
+        run: npm run lint
       - name: Build Dependencies
         run: npm ci
       - name: Test
-        run: npm test
+        run: npm run test
       - name: Build
         run: npm run build
