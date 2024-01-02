@@ -1,0 +1,22 @@
+name: CI-CD
+on: push
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "CI Phase"
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Lint
+        run: eslint
+      - name: Build Dependencies
+        run: npm ci
+      - name: Test
+        run: npm test
+      - name: Build
+        run: npm run build
