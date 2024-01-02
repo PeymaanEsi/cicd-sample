@@ -53,5 +53,5 @@ jobs:
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "./build.zip"
+          source: "./build.gz"
           target: "/home/iranperson"
